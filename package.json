@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "element-plus": "^2.6.1",
     "mqtt": "^5.3.6",
+    "unplugin-auto-import": "^0.16.1",
+    "unplugin-vue-components": "^0.25.2",
     "vue": "^3.2.13"
   },
   "devDependencies": {
