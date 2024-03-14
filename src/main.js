@@ -20,3 +20,10 @@ import store from '@/js/vuex/index'
 app.use(store)
 
 app.mount("#app")
+
+import "element-plus/theme-chalk/el-loading.css";
+import "element-plus/theme-chalk/el-message.css";
+import "element-plus/theme-chalk/el-notification.css";
+import "element-plus/theme-chalk/el-message-box.css";
+
+

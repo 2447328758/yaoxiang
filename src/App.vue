@@ -1,6 +1,8 @@
 <template>
-  <router-view>
-  </router-view>
+  <div id="mainContainer">
+    <router-view>
+    </router-view>
+  </div>
   <bottom-nav></bottom-nav>
 </template>
 
@@ -8,9 +10,19 @@
 import BottomNav from '@/pages/widgts/BottomNav'
 import {onMounted} from 'vue';
 import {useRouter} from 'vue-router';
+import {connect} from '@/js/mqtt/index.js'
+import {ElNotification} from 'element-plus'
 const router=useRouter();
 onMounted(()=>{
   router.push("/");
+  connect("wss://broker.emqx.io:8084/mqtt").then((res)=>{
+    console.log(res);
+    ElNotification({
+      title:"success",
+      message:"MQTT连接成功！",
+      type:"success"
+    })
+  });
 })
 </script>
 
@@ -26,10 +38,14 @@ onMounted(()=>{
   transition: var(--el-transition-color);
   transition: var(--el-transition-border);
   transition: var(--el-transition-fade-linear);
-
 }
 
 body{
   background-color: var(--el-bg-color-page);
 }
+
+#mainContainer{
+  padding: 5px;
+}
+
 </style>
