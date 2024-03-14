@@ -1,15 +1,16 @@
 <template>
-  <router-view></router-view>
+  <router-view>
+  </router-view>
+  <bottom-nav></bottom-nav>
 </template>
 
 <script setup>
+import BottomNav from '@/pages/widgts/BottomNav'
 import {onMounted} from 'vue';
 import {useRouter} from 'vue-router';
 const router=useRouter();
 onMounted(()=>{
   router.push("/");
-  onMounted(() => {
-  })
 })
 </script>
 

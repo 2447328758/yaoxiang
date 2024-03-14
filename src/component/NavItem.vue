@@ -1,29 +1,31 @@
 <template lang="">
     <div class="container">
         <el-col class="item" :class="selected?'selected':''">
-            <el-row><div><el-icon :size="30" ><User /></el-icon></div></el-row>
-            <el-row><div><text >我的</text></div></el-row>
+            <el-row><div><el-icon :size="30" ><slot></slot></el-icon></div></el-row>
+            <el-row><div><text >{{text}}</text></div></el-row>
         </el-col>
     </div>
 </template>
 <script>
-import {User} from '@element-plus/icons-vue'
 export default {
-    components:{
-        User
-    },
     props:{
         selected:{
             default:false
+        },
+        text:{
+            default:"默认"
+        },
+        icon:{
+
         }
-    }
+    },
 }
 </script>
 <style scoped lang="scss">
     .container{
         margin: 5px; 
         /* background-color: antiquewhite;  */
-        width: 50px; 
+        width: 60px; 
         height: 50px; 
         display: inline;
         font-size: small;
