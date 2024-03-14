@@ -13,7 +13,9 @@
     "mqtt": "^5.3.6",
     "unplugin-auto-import": "^0.16.1",
     "unplugin-vue-components": "^0.25.2",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue-router": "^4.3.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

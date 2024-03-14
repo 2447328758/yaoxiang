@@ -1,6 +1,6 @@
 import mqtt from "mqtt"
 
-function connect(broker:string){
+function connect(broker){
     const client = mqtt.connect(broker,{
         clientId:Math.random().toFixed(32).toString().substring(2),
         clean:true,
