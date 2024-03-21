@@ -5,17 +5,16 @@
                 <span>{{title}}</span>
             </div>
         </template>
-        <progress-bar v-for="(item,index ) in data" :data="item" :key="index"></progress-bar>
-        
+        <status-panel v-for="(item,index ) in data" :data="item" :key="index"></status-panel>
         <el-empty :image-size="70" v-if="data.length==0" />
     </el-card>
 </template>
   
 <script>
-    import ProgressBar from '@/component/iot/cardProgress/ProgressBar'
+    import StatusPanel from '@/component/iot/cardStatus/StatusPanel'
     export default{
         components:{
-            ProgressBar
+            StatusPanel
         },
         props:{
             title:{
@@ -23,7 +22,16 @@
                 type:String
             },
             data:{
-                default:[]
+                default:[
+                    {
+                        desp:"早餐",
+                        value:1
+                    },
+                    {
+                        desp:"午餐",
+                        value:0
+                    }
+                ]
             }
         }
     }
@@ -32,7 +40,6 @@
 #card-header{
     font-weight: bold;
     margin: 5px;
-
 }
 </style>
   

@@ -1,14 +1,18 @@
 <template>
     <div class="container">
-        <el-row :gutter="0" justify="center">
+        <el-row :gutter="0" justify="center" align="middle">
           <el-col :span="12">
-            <el-progress stroke-linecap="round" :width="60" type="circle" :percentage="Number(data.getPercent())" :color="colors" />
+            <el-progress stroke-linecap="round" :width="60" type="circle" :percentage="Number(data.getPercent())" :color="colors" >
+              <template #default="">
+                <span class="percentage-value">{{ data.value }}{{ data.unit }}</span>
+              </template>
+            </el-progress>
           </el-col>
           <el-col :span="12">
-            <el-row justify="center">
+            <el-row justify="center" class="text">
                 <el-col :span="24"><text>{{data.desp}}</text></el-col>
             </el-row>
-            <el-row :gutter="0" justify="center">
+            <el-row :gutter="0" justify="center" class="text">
               <el-col :span="24"><text>{{data.value}}{{data.unit}}</text></el-col>
             </el-row>
           </el-col>
@@ -35,11 +39,16 @@ defineProps({
 .container{
     display: inline-block;
     box-sizing: content-box;
-    width: 45%;
-    min-width: 45%;
-    max-width: 50%;
     text-align: center;
+    text-wrap: nowrap;
     margin: 5px;
+    .text{
+      box-sizing: content-box;
+    }
+}
+
+.percentage-value{
+  display: block;
 }
 </style>
   

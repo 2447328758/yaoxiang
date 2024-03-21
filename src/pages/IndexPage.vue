@@ -3,9 +3,12 @@
         indexpage
         <el-button type="primary" @click="user()"></el-button>
         <div></div>
-        <card-progress title="药箱状态" :data="store.state.numberData">
+        <card-progress title="药箱数据" :data="store.state.numberData">
 
         </card-progress>
+        <card-status title="药箱状态">
+
+        </card-status>
     </div>
 </template>
 <script setup>
@@ -16,6 +19,7 @@ import {useRouter} from 'vue-router';
 const router=useRouter();
 
 import CardProgress from '@/component/iot/cardProgress/CardProgress'
+import CardStatus from '@/component/iot/cardStatus/CardStatus'
 import { ElMessage } from 'element-plus'
 function user(){
     ElMessage({
