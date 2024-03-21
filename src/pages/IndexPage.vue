@@ -6,7 +6,7 @@
         <card-progress title="药箱数据" :data="store.state.numberData">
 
         </card-progress>
-        <card-status title="药箱状态">
+        <card-status title="药箱状态" :data="store.state.statusData">
 
         </card-status>
     </div>
