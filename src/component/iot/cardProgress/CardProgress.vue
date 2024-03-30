@@ -32,6 +32,7 @@
 #card-header{
     font-weight: bold;
     margin: 5px;
+    font-family: inherit;
 
 }
 </style>

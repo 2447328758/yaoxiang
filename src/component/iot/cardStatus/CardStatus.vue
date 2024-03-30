@@ -38,6 +38,7 @@
 </script>
 <style lang="scss" scoped>
 #card-header{
+    font-family: inherit;
     font-weight: bold;
     margin: 5px;
 }
