@@ -1,15 +1,15 @@
 <template lang="">
     <div>
         <div ref="left" id="left" v-if='endt.value!=0'>
-            <el-row justify=space-around>
-              <el-col :span="2">{{leftTime.getHours()-8}}</el-col>
-              <el-col :span="1">:</el-col>
-              <el-col :span="3">{{leftTime.getMinutes()}}</el-col>
-              <el-col :span="1">:</el-col>
-              <el-col :span="3">{{leftTime.getSeconds()}}</el-col>
-              <el-col :span="1">.</el-col>
-              <el-col :span="5">{{leftTime.getMilliseconds()}}</el-col>
-            </el-row>            
+            <div id="time">
+              <div class="item">{{leftTime.getHours()<10?"0":""}}{{leftTime.getHours()-8}}</div>
+              <div class="item">:</div>
+              <div class="item">{{leftTime.getMinutes()<10?"0":""}}{{leftTime.getMinutes()}}</div>
+              <div class="item">:</div>
+              <div class="item">{{leftTime.getSeconds()<10?"0":""}}{{leftTime.getSeconds()}}</div>
+              <div class="item">.</div>
+              <div class="item">{{leftTime.getMilliseconds()<10?"0":""}}{{leftTime.getMilliseconds()<100?"0":""}}{{leftTime.getMilliseconds()}}</div>
+            </div>            
         </div>
         <el-empty :image-size="35" description="没有设置时间" v-if="endt.value==0">
             <slot ></slot>
@@ -76,9 +76,14 @@ watch(endt,async (nv,ov)=>{
 #left{
     font-family: '阿里妈妈灵动体 VF Thin';
     font-weight:300;
-    font-size: 50px;
+    font-size: 40px;
     transition: var(--el-transition-all);
     color:#66bb6a;
+}
+#time{
+    display: flex;
+    margin: auto;
+    justify-content: center;
 }
 .el-empty{
     // border: 1px solid black;
