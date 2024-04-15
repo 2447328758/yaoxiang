@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-
+import {ref} from 'vue'
 export default createStore({
     state:{
         state_test:"test_state",
@@ -52,7 +52,9 @@ export default createStore({
                 desp:"晚饭",
                 value:0
             },
-        ]
+        ],
+        endt:ref({value:0})
+        
     },
     //操作
     mutations:{
@@ -66,6 +68,9 @@ export default createStore({
                 if(filt.length!=0)
                     filt[0].value=jsonMsg.value
             }
+        },
+        setEndt(state,endt){
+            state.endt.value=endt
         }
     }
 })

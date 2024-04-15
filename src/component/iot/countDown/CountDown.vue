@@ -27,6 +27,9 @@ const colors=[
     "#b71c1c","#d32f2f","#f44336","#ef5350"
 ]
 let intervalId,falshCount=true,animateId;
+if(endt.value!=0){
+    getLeftTimeString()
+}
 function getLeftTimeString()
 { 
 

@@ -2,6 +2,7 @@
     <div>
         indexpage
         <el-button type="primary" @click="user()"></el-button>
+        <el-button type="primary" @click="req()">测试api</el-button>
         <div></div>
         <card-progress title="药箱数据" :data="store.state.numberData">
 
@@ -33,11 +34,18 @@ import CardStatus from '@/component/iot/cardStatus/CardStatus'
 import { ElMessage } from 'element-plus'
 import CardCountDown from '@/component/iot/countDown/CardCountDown.vue';
 import { ref,provide,onMounted } from 'vue';
-const endt=ref({value:0});//这里使用{}否则不能被引用
+import getHistoryData from "@/js/onenethttp/index"
+const endt=store.state.endt;//直接引用state里面的ref
 const input = ref();
+if(localStorage.endt)//如果localstorage
+{
+    endt.value=localStorage.endt;
+    console.log(endt)
+}
 provide("endt",endt);
 function setEndt(){
     endt.value=new Date(input.value).getTime();
+    localStorage.endt=endt.value;
 }
 function user(){
     ElMessage({
@@ -47,6 +55,23 @@ function user(){
         })
     console.log(store.state.state_test);
     router.push("/profile");
+}
+function req(){
+    getHistoryData().then(res=>{
+        if(res.status==200){
+            res.json().then(j=>{
+                console.log(j);
+                ElMessage({
+                    message: '请求成功!code:'+res.status,
+                    type: 'success',
+                    })
+            })
+        }else
+        ElMessage({
+            message: '请求失败!code:'+res.status,
+            type: 'error',
+            })
+    })
 }
 onMounted(()=>{
 console.log(endt)

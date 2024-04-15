@@ -1,7 +1,7 @@
 import mqtt from "mqtt"
 
 import {useStore} from 'vuex';
-
+import { ElMessage } from 'element-plus'
 
 const topic_pub="test652110"
 
@@ -25,9 +25,15 @@ export function connect(broker){
             //todo 订阅并处理收到的消息
             client.subscribe(topic_pub);
             client.on("message",(top,msg)=>{
-                console.log(msg.toString())
-                let jsonMsg = JSON.parse(msg);
-                store.commit('setIotState',jsonMsg);
+                ElMessage({
+                    message: 'rec:'+msg,
+                    type: 'success',
+                    })
+                //todo 处理数据
+                // console.log(msg.toString())
+                // let jsonMsg = JSON.parse(msg);
+                // store.commit('setIotState',jsonMsg);
+                store;
             })
             resolve(err)
         })
