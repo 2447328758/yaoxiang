@@ -33,10 +33,11 @@ if(endt.value!=0){
 function getLeftTimeString()
 { 
 
-    //todo 将time重新计算为endt.value减去当天经过的ms数
-    let time = new Date(endt.value-Date.now())
+    //将time重新计算为endt.value减去当天经过的ms数
+    let now = new Date();
+    let time = new Date(endt.value-(now.getTime()-new Date().setHours(0,0,0,0)))
     if(time.getTime()<=0){
-        left.value.innerHTML="0:0:0.000";
+        leftTime.value=0;
         intervalId = setInterval(()=>{
             if(falshCount)
                 left.value.style.color="#ffcdd2";

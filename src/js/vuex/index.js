@@ -74,10 +74,11 @@ export default createStore({
         },
         setEndt(state, payload){
             //todo设置value为时分秒时间
+            let time =payload.value.getTime() - new Date().setHours(0,0,0,0);
             switch(payload.ord){
-                case 0:state.endt1.value=payload.value;break;
-                case 1:state.endt2.value=payload.value;break;
-                case 2:state.endt3.value=payload.value;break;
+                case 0:state.endt1.value=time;break;
+                case 1:state.endt2.value=time;break;
+                case 2:state.endt3.value=time;break;
             }
         }
     },

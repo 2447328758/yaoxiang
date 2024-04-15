@@ -16,9 +16,8 @@ const paths = [
     "/",
     "/profile"
 ]
-watch(selected,(n,o)=>{
+watch(selected,(n)=>{
     router.push(paths[n]);
-    // console.log(o);
 })
 </script>
 <style lang="scss">
