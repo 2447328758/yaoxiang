@@ -18,11 +18,14 @@
             <el-divider direction='vertical'></el-divider>
             <el-time-picker v-model="input3" size="large" @change="setEndt(2)" />
         </el-row>
+        <el-button @click="send()">test send(发送123)</el-button>
+
     </div>
 </template>
 <script setup>
 import {ref} from 'vue'
 import { useStore } from 'vuex';
+import { sendCmd } from '@/js/mqtt';
 const input1 = ref();
 const input2 = ref();
 const input3 = ref();
@@ -35,6 +38,14 @@ function setEndt(ord){
         case 2:input=input3.value;break;
     }
     store.commit("setEndt",{ord:ord,value:input});//
+    //todo 发送时间命令
+    sendCmd(`${input.getHours()}:${input.getMinutes()}:${input.getSeconds()}`);
+}
+
+
+
+function send(){
+    sendCmd("123")
 }
 </script>
 <style lang="scss" scoped>
