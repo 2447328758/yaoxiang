@@ -18,7 +18,7 @@ const paths = [
 ]
 watch(selected,(n,o)=>{
     router.push(paths[n]);
-    console.log(o);
+    // console.log(o);
 })
 </script>
 <style lang="scss">

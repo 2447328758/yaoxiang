@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import {ref} from 'vue'
+
 export default createStore({
     state:{
         state_test:"test_state",
@@ -53,7 +54,9 @@ export default createStore({
                 value:0
             },
         ],
-        endt:ref({value:0})
+        endt1:ref({value:0}),
+        endt2:ref({value:0}),
+        endt3:ref({value:0})
         
     },
     //操作
@@ -69,8 +72,19 @@ export default createStore({
                     filt[0].value=jsonMsg.value
             }
         },
-        setEndt(state,endt){
-            state.endt.value=endt
+        setEndt(state, payload){
+            //todo设置value为时分秒时间
+            switch(payload.ord){
+                case 0:state.endt1.value=payload.value;break;
+                case 1:state.endt2.value=payload.value;break;
+                case 2:state.endt3.value=payload.value;break;
+            }
+        }
+    },
+    getters:{
+        getL(state){
+             //todo获取最近一次的endt
+            return  state.endt3;
         }
     }
 })

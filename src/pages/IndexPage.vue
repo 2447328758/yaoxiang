@@ -35,17 +35,12 @@ import { ElMessage } from 'element-plus'
 import CardCountDown from '@/component/iot/countDown/CardCountDown.vue';
 import { ref,provide,onMounted } from 'vue';
 import getHistoryData from "@/js/onenethttp/index"
-const endt=store.state.endt;//直接引用state里面的ref
+const endt=store.getters.getL;//直接引用state里面的ref
 const input = ref();
-if(localStorage.endt)//如果localstorage
-{
-    endt.value=localStorage.endt;
-    console.log(endt)
-}
+
 provide("endt",endt);
 function setEndt(){
     endt.value=new Date(input.value).getTime();
-    localStorage.endt=endt.value;
 }
 function user(){
     ElMessage({

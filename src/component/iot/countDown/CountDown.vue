@@ -20,7 +20,7 @@
 import {inject,watch,ref,onBeforeUnmount} from 'vue'
 
 const endt = inject("endt");
-
+console.log(endt)
 const left=ref(null);
 const leftTime=ref(new Date())
 const colors=[
@@ -33,6 +33,7 @@ if(endt.value!=0){
 function getLeftTimeString()
 { 
 
+    //todo 将time重新计算为endt.value减去当天经过的ms数
     let time = new Date(endt.value-Date.now())
     if(time.getTime()<=0){
         left.value.innerHTML="0:0:0.000";
