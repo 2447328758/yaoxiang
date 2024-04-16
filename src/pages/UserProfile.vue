@@ -18,7 +18,7 @@
             <el-divider direction='vertical'></el-divider>
             <el-time-picker v-model="input3" size="large" @change="setEndt(2)" />
         </el-row>
-        <el-button @click="send()">test send(发送123)</el-button>
+        <el-button @click="send()">test send(发送uint8array(12344))</el-button>
 
     </div>
 </template>
@@ -39,13 +39,21 @@ function setEndt(ord){
     }
     store.commit("setEndt",{ord:ord,value:input});//
     //todo 发送时间命令
-    sendCmd(`${input.getHours()}:${input.getMinutes()}:${input.getSeconds()}`);
+    let a = new Uint8Array(2);
+    a[0]=input.getHours();a[1]=input.getMinutes();
+    sendCmd(a);
 }
 
 
 
 function send(){
-    sendCmd("123")
+    let a = new Uint8Array(5);
+    a[0]=1;
+    a[1]=2;
+    a[2]=3;
+    a[3]=4;
+    a[4]=4;
+    sendCmd(a);
 }
 </script>
 <style lang="scss" scoped>
