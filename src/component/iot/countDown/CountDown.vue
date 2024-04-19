@@ -14,30 +14,33 @@
         <el-empty :image-size="35" description="没有设置时间" v-if="endt.value==0">
             <slot ></slot>
         </el-empty>
+        {{endt}}
     </div>
 </template>
 <script setup>
-import {inject,watch,ref,onBeforeUnmount} from 'vue'
+import {watch,ref,onBeforeUnmount,computed} from 'vue'
+import { useStore } from 'vuex';
+const store=useStore();
+const endt = computed(()=>store.getters.getL)
 
-const endt = inject("endt");
-console.log(endt)
+global.endt=endt
 const left=ref(null);
 const leftTime=ref(new Date())
 const colors=[
     "#b71c1c","#d32f2f","#f44336","#ef5350"
 ]
-let intervalId,falshCount=true,animateId;
-if(endt.value!=0){
+var intervalId,falshCount=true,animateId;
+if(endt.value.value!=0){
     getLeftTimeString()
 }
 function getLeftTimeString()
 { 
 
-    //将time重新计算为endt.value减去当天经过的ms数
+    //将time重新计算为endt.value.value减去当天经过的ms数
     let now = new Date();
-    let time = new Date(endt.value-(now.getTime()-new Date().setHours(0,0,0,0)))
+    let time = new Date(endt.value.value-(now.getTime()-new Date().setHours(0,0,0,0)))
     if(time.getTime()<=0){
-        leftTime.value=0;
+        leftTime.value=new Date(0);
         intervalId = setInterval(()=>{
             if(falshCount)
                 left.value.style.color="#ffcdd2";
@@ -69,7 +72,9 @@ watch(endt,async (nv,ov)=>{
     if(intervalId)
         clearInterval(intervalId);
     animateId = requestIdleCallback(getLeftTimeString);
-    console.log(endt)
+    // console.log(endt.value)
+},{
+    deep:true
 })
 </script>
 <style lang="scss" scoped>

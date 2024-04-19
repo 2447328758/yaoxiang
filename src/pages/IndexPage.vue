@@ -11,14 +11,12 @@
 
         </card-status>
         <card-count-down title="距离下次服药"
-        :endt="endt"
         ref="cardCD">
             <div>
-                <input v-model="input" clearable placeholder="请输入时间(yyyy-MM-dd hh:mm:ss)"/>
-                <el-button type="primary"  size='mini' @click="setEndt()">确认</el-button>
+                <!-- <input v-model="input" clearable placeholder="请输入时间(yyyy-MM-dd hh:mm:ss)"/>
+                <el-button type="primary"  size='mini' @click="setEndt()">确认</el-button> -->
             </div>
         </card-count-down>
-        
         
     </div>
 </template>
@@ -33,15 +31,8 @@ import CardProgress from '@/component/iot/cardProgress/CardProgress'
 import CardStatus from '@/component/iot/cardStatus/CardStatus'
 import { ElMessage } from 'element-plus'
 import CardCountDown from '@/component/iot/countDown/CardCountDown.vue';
-import { ref,provide,onMounted } from 'vue';
 import getHistoryData from "@/js/onenethttp/index"
-const endt=store.getters.getL;//直接引用state里面的ref
-const input = ref();
 
-provide("endt",endt);
-function setEndt(){
-    endt.value=new Date(input.value).getTime();
-}
 function user(){
     ElMessage({
 
@@ -68,10 +59,7 @@ function req(){
             })
     })
 }
-onMounted(()=>{
-console.log(endt)
 
-})
 </script>
 <style lang="scss">
     

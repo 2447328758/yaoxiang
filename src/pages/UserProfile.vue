@@ -2,19 +2,19 @@
     <div>
         UserProfile
         <el-row justify='center' align="middle">
-            <el-text size=large>服药时间1</el-text>
+            <el-text size=large>服药时间(早)</el-text>
             <el-divider direction='vertical'></el-divider>
             <el-time-picker v-model="input1" size="large" @change="setEndt(0)" />
         </el-row>
         <el-divider></el-divider>
         <el-row justify='center' align="middle">
-            <el-text size=large>服药时间2</el-text>
+            <el-text size=large>服药时间(中)</el-text>
             <el-divider direction='vertical'></el-divider>
             <el-time-picker v-model="input2" size="large" @change="setEndt(1)" />
         </el-row>
         <el-divider></el-divider>
         <el-row justify='center' align="middle">
-            <el-text size=large>服药时间3</el-text>
+            <el-text size=large>服药时间(晚)</el-text>
             <el-divider direction='vertical'></el-divider>
             <el-time-picker v-model="input3" size="large" @change="setEndt(2)" />
         </el-row>
@@ -30,18 +30,21 @@ const input1 = ref();
 const input2 = ref();
 const input3 = ref();
 const store=useStore();
+import {to2bit} from '../js/utils/nf'
+
 function setEndt(ord){
     let input;
+    let prefix=""
     switch(ord){
-        case 0:input=input1.value;break;
-        case 1:input=input2.value;break;
-        case 2:input=input3.value;break;
+        case 0:input=input1.value;prefix='mon';break;
+        case 1:input=input2.value;prefix='aft';break;
+        case 2:input=input3.value;prefix='nig';break;
     }
     store.commit("setEndt",{ord:ord,value:input});//
     //todo 发送时间命令
-    let a = new Uint8Array(2);
-    a[0]=input.getHours();a[1]=input.getMinutes();
-    sendCmd(a);
+    //let a = new Uint8Array(2);
+    //a[0]=input.getHours();a[1]=input.getMinutes();
+    sendCmd(prefix+`${to2bit(input.getHours())}${to2bit(input.getMinutes())}`);
 }
 
 

@@ -20,16 +20,16 @@ export function connect(broker){
 
             //todo 订阅并处理收到的消息
             client.subscribe(topic_sub);
-            client.on("message",(top,msg)=>{
-                ElMessage({
-                    message: 'rec:'+msg,
-                    type: 'success',
-                    })
-                //todo 处理数据
-                // console.log(msg.toString())
-                // let jsonMsg = JSON.parse(msg);
-                // store.commit('setIotState',jsonMsg);
-            })
+            // client.on("message",(top,msg)=>{
+            //     ElMessage({
+            //         message: 'rec:'+msg,
+            //         type: 'success',
+            //         })
+            //     //todo 处理数据
+            //     // console.log(msg.toString())
+            //     // let jsonMsg = JSON.parse(msg);
+            //     // store.commit('setIotState',jsonMsg);
+            // })
 
             //将client设置到全局变量
             global.mqc=client;

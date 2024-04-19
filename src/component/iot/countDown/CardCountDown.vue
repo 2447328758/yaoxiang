@@ -5,7 +5,7 @@
                 <span>{{title}}</span>
             </div>
         </template>
-        <count-down :endt="endt"><slot></slot></count-down>
+        <count-down><slot></slot></count-down>
     </el-card>
 </template>
   
@@ -16,10 +16,6 @@ defineProps({
     title:{
         default:"距离下次服药",
         type:String
-    },
-    endt:{
-        default:0,
-        type:Number
     }
 })
 </script>

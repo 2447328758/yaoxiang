@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import {ref} from 'vue'
+// import {ref} from 'vue'
 
 export default createStore({
     state:{
@@ -54,9 +54,9 @@ export default createStore({
                 value:0
             },
         ],
-        endt1:ref({value:0}),
-        endt2:ref({value:0}),
-        endt3:ref({value:0})
+        endt1:{value:0,id:0},
+        endt2:{value:0,id:1},
+        endt3:{value:0,id:2}
         
     },
     //操作
@@ -85,7 +85,17 @@ export default createStore({
     getters:{
         getL(state){
              //todo获取最近一次的endt
-            return  state.endt3;
+            let min = state.endt1;
+            //先将min设置为最大的
+            if(state.endt2.value>min.value)min=state.endt2;
+            if(state.endt3.value>min.value)min=state.endt3;
+            if(min.value==0)return min;//如果最大的是0直接返回
+
+            //判断最小的
+            if(state.endt1.value<min.value&&state.endt1.value!=0)min=state.endt1;
+            if(state.endt2.value<min.value&&state.endt2.value!=0)min=state.endt2;
+            if(state.endt3.value<min.value&&state.endt3.value!=0)min=state.endt3;
+            return  min;
         }
     }
 })
