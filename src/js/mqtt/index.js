@@ -35,23 +35,23 @@ export function connect(broker){
             //todo 订阅并处理收到的消息
             client.subscribe(topic_sub);
             client.on("message",(top,msg)=>{
-                ElMessage({
-                    message: 'rec from '+top+':'+msg,
-                    type: 'success',
-                    })
+                // ElMessage({
+                //     message: 'rec from '+top+':'+msg,
+                //     type: 'success',
+                //     })
                 let jsonMsg={}
                 if(top==topic_sub){
                     let ms = Uint8ArrayToString(msg);
                     switch(ms){
-                        case "mon1":jsonMsg.type='bool';jsonMsg.value=1;jsonMsg.id='m';ElMessage({
+                        case "zao1":jsonMsg.type='bool';jsonMsg.value=1;jsonMsg.id='m';ElMessage({
                             message: "早上已服药",
                             type: 'success',
                             });break;
-                        case "aft1":jsonMsg.type='bool';jsonMsg.value=1;jsonMsg.id='n';ElMessage({
+                        case "zhong1":jsonMsg.type='bool';jsonMsg.value=1;jsonMsg.id='n';ElMessage({
                             message: "中午已服药",
                             type: 'success',
                             });break;
-                        case "nig1":jsonMsg.type='bool';jsonMsg.value=1;jsonMsg.id='e';ElMessage({
+                        case "wan1":jsonMsg.type='bool';jsonMsg.value=1;jsonMsg.id='e';ElMessage({
                             message: "晚上已服药",
                             type: 'success',
                             });break;
@@ -67,6 +67,7 @@ export function connect(broker){
                         jsonMsg.value=msg[3];
                     }
                 }
+                
                 //todo 处理数据
                 // console.log(msg.toString())
                 // let jsonMsg = JSON.parse(msg);
@@ -97,7 +98,9 @@ export function sendCmd(msg)
     }
     //发送数据
     try{
-        client.publish(topic_pub,msg);
+        client.publish(topic_pub,msg,{
+            qos:2,
+        });
     }catch(e){
         ElMessage({
             message: 'unkown:'+e,
