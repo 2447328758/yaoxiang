@@ -14,7 +14,7 @@
         <el-empty :image-size="35" description="没有设置时间" v-if="endt.value==0">
             <slot ></slot>
         </el-empty>
-        {{endt}}
+        <!-- {{endt}} -->
     </div>
 </template>
 <script setup>

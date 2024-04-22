@@ -6,7 +6,7 @@ export default createStore({
         state_test:"test_state",
         numberData:[
             {
-                id:"temp1",
+                id:"tem",
                 desp:"当前温度",
                 value:100,
                 min:0,
@@ -16,41 +16,42 @@ export default createStore({
                     return ((this.value-this.min)*100/(this.max-this.min)).toFixed(1);
                 }
             },{
-                id:"temp2",
-                desp:"当前温度",
+                id:"hum",
+                desp:"当前湿度",
                 value:100,
                 min:0,
                 max:150,
-                unit:"°C",
+                unit:"hum",
                 getPercent(){
                     return ((this.value-this.min)*100/(this.max-this.min)).toFixed(1);
                 }
-            },{
-                id:"temp3",
-                desp:"当前温度",
-                value:100,
-                min:0,
-                max:150,
-                unit:"°C",
-                getPercent(){
-                    return ((this.value-this.min)*100/(this.max-this.min)).toFixed(1);
-                }
-            }
+            },
+            // {
+            //     id:"temp3",
+            //     desp:"当前温度",
+            //     value:100,
+            //     min:0,
+            //     max:150,
+            //     unit:"°C",
+            //     getPercent(){
+            //         return ((this.value-this.min)*100/(this.max-this.min)).toFixed(1);
+            //     }
+            // }
         ],
         statusData:[
             {
                 id:"m",
-                desp:"早饭",
-                value:1
+                desp:"早上",
+                value:0
             },
             {
                 id:"n",
-                desp:"午饭",
+                desp:"中午",
                 value:0
             },
             {
                 id:"e",
-                desp:"晚饭",
+                desp:"晚上",
                 value:0
             },
         ],
@@ -71,6 +72,7 @@ export default createStore({
                 if(filt.length!=0)
                     filt[0].value=jsonMsg.value
             }
+            console.log(jsonMsg)
         },
         setEndt(state, payload){
             //todo设置value为时分秒时间
