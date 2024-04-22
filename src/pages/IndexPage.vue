@@ -1,8 +1,8 @@
 <template lang="">
     <div>
-        indexpage
+        <!-- indexpage
         <el-button type="primary" @click="user()"></el-button>
-        <el-button type="primary" @click="req()">测试api</el-button>
+        <el-button type="primary" @click="req()">测试api</el-button> -->
         <div></div>
         <card-progress title="药箱数据" :data="store.state.numberData">
 
@@ -24,41 +24,41 @@
 import {useStore} from 'vuex';
 const store = useStore();
 
-import {useRouter} from 'vue-router';
-const router=useRouter();
+// import {useRouter} from 'vue-router';
+// const router=useRouter();
 
 import CardProgress from '@/component/iot/cardProgress/CardProgress'
 import CardStatus from '@/component/iot/cardStatus/CardStatus'
-import { ElMessage } from 'element-plus'
+// import { ElMessage } from 'element-plus'
 import CardCountDown from '@/component/iot/countDown/CardCountDown.vue';
-import getHistoryData from "@/js/onenethttp/index"
+// import getHistoryData from "@/js/onenethttp/index"
 
-function user(){
-    ElMessage({
+// function user(){
+//     ElMessage({
 
-            message: 'Connect to emqx success!',
-            type: 'success',
-        })
-    console.log(store.state.state_test);
-    router.push("/profile");
-}
-function req(){
-    getHistoryData().then(res=>{
-        if(res.status==200){
-            res.json().then(j=>{
-                console.log(j);
-                ElMessage({
-                    message: '请求成功!code:'+res.status,
-                    type: 'success',
-                    })
-            })
-        }else
-        ElMessage({
-            message: '请求失败!code:'+res.status,
-            type: 'error',
-            })
-    })
-}
+//             message: 'Connect to emqx success!',
+//             type: 'success',
+//         })
+//     console.log(store.state.state_test);
+//     router.push("/profile");
+// }
+// function req(){
+//     getHistoryData().then(res=>{
+//         if(res.status==200){
+//             res.json().then(j=>{
+//                 console.log(j);
+//                 ElMessage({
+//                     message: '请求成功!code:'+res.status,
+//                     type: 'success',
+//                     })
+//             })
+//         }else
+//         ElMessage({
+//             message: '请求失败!code:'+res.status,
+//             type: 'error',
+//             })
+//     })
+// }
 
 </script>
 <style lang="scss">

@@ -72,7 +72,7 @@ export default createStore({
                 if(filt.length!=0)
                     filt[0].value=jsonMsg.value
             }
-            console.log(jsonMsg)
+            // console.log(jsonMsg)
         },
         setEndt(state, payload){
             //todo设置value为时分秒时间
