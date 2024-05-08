@@ -57,7 +57,8 @@ export default createStore({
         ],
         endt1:{value:0,id:0},
         endt2:{value:0,id:1},
-        endt3:{value:0,id:2}
+        endt3:{value:0,id:2},
+        recd:[]
         
     },
     //操作
@@ -71,6 +72,21 @@ export default createStore({
                 let filt = state.statusData.filter((v)=>v.id===jsonMsg.id)
                 if(filt.length!=0)
                     filt[0].value=jsonMsg.value
+
+                //添加一条记录
+                let d = new Date();
+                let t;
+                switch(jsonMsg.id){
+                    case "m":t="早上";break;
+                    case "n":t="中午";break;
+                    case "e":t="晚上";break;
+                }
+                state.recd.push({
+                    date:`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`,
+                    time:t,
+                    state:"已服药"
+                })
+
             }
             // console.log(jsonMsg)
         },
@@ -81,6 +97,42 @@ export default createStore({
                 case 0:state.endt1.value=time;break;
                 case 1:state.endt2.value=time;break;
                 case 2:state.endt3.value=time;break;
+            }
+        },
+
+        //保存缓存
+        saveStorage(state){
+            //保存Rec
+            localStorage.setItem("recd",JSON.stringify(
+                state.recd
+            ))
+
+            localStorage.setItem("endt1",JSON.stringify(state.endt1));
+            localStorage.setItem("endt2",JSON.stringify(state.endt2));
+            localStorage.setItem("endt3",JSON.stringify(state.endt3));
+            console.log("save storage")
+        },
+        //初始化缓存()
+        initStorage(state){
+            let recd = localStorage.getItem("recd");
+            let endt1 = localStorage.getItem("endt1");
+            let endt2 = localStorage.getItem("endt2");
+            let endt3 = localStorage.getItem("endt3");
+
+            try{
+                recd=JSON.parse(recd);
+                endt1=JSON.parse(endt1);
+                endt2=JSON.parse(endt2);
+                endt3=JSON.parse(endt3);
+
+                state.recd=recd;
+                state.endt1=endt1;
+                state.endt2=endt2;
+                state.endt3=endt3;
+
+                console.info(recd,endt1,endt2,endt3)
+            }catch(e){
+                console.warn("json parse error, 记录缓存不是有效的json字符串:",recd)
             }
         }
     },

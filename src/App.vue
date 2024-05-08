@@ -12,12 +12,15 @@
 
 <script setup>
 import BottomNav from '@/pages/widgts/BottomNav'
-import {onMounted} from 'vue';
 import {useRouter} from 'vue-router';
 import {connect} from '@/js/mqtt/index.js'
 import {ElNotification} from 'element-plus'
+import {useStore} from 'vuex'
+import {onBeforeMount} from "vue"
 const router=useRouter();
-onMounted(()=>{
+const ustore = useStore();
+
+onBeforeMount(()=>{
   router.push("/");
   connect("wss://broker.emqx.io:8084/mqtt").then((res)=>{
     console.log(res);
@@ -27,6 +30,14 @@ onMounted(()=>{
       type:"success"
     })
   });
+  ustore.commit("initStorage")
+  console.log("获取本地记录成功！")
+})
+
+
+//退出前保存缓存数据
+global.addEventListener("beforeunload",()=>{
+  ustore.commit("saveStorage")
 })
 </script>
 
