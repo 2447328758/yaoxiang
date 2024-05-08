@@ -11,7 +11,7 @@
               <div class="item">{{leftTime.getMilliseconds()<10?"0":""}}{{leftTime.getMilliseconds()<100?"0":""}}{{leftTime.getMilliseconds()}}</div>
             </div>            
         </div>
-        <el-empty :image-size="35" description="没有设置时间" v-if="endt.value==0">
+        <el-empty :image-size="35" description="没有设置时间或者服药时间已过" v-if="endt.value==0">
             <slot ></slot>
         </el-empty>
         <!-- {{endt}} -->
@@ -35,19 +35,50 @@ if(endt.value.value!=0){
 }
 function getLeftTimeString()
 { 
-
     //将time重新计算为endt.value.value减去当天经过的ms数
     let now = new Date();
     let time = new Date(endt.value.value-(now.getTime()-new Date().setHours(0,0,0,0)))
     if(time.getTime()<=0){
         leftTime.value=new Date(0);
+        let n = 0;
         intervalId = setInterval(()=>{
-            if(falshCount)
-                left.value.style.color="#ffcdd2";
-            else
-                left.value.style.color=colors[0];
-            falshCount=!falshCount;
+
+            try{
+                if(falshCount)
+                    left.value.style.color="#ffcdd2";
+                else
+                    left.value.style.color=colors[0];
+                falshCount=!falshCount;
+            }catch(e){
+                clearInterval(intervalId);
+            }
             
+            n++;
+
+            if(n>10){
+                
+                //添加未服药记录
+                let d = new Date();
+                let t;
+                if(store.state.reed.length==0)t='早上';
+                if(store.state.reed.length==1)t='中午';
+                if(store.state.reed.length==2)t='晚上';
+
+                switch(t){
+                    case "早上":store.state.reed.push("m");    break;
+                    case "中午":store.state.reed.push("n");    break;
+                    case "晚上":store.state.reed.push("e");    break;
+                }
+                store.state.recd.push({
+                    date:`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`,
+                    time:t,
+                    state:"未服药"
+                })
+                
+                console.log("停止！",store.state.recd,store.state.reed)
+                //停止
+                clearInterval(intervalId);
+            }
         },500);
         cancelIdleCallback(animateId);//动画结束
         return;
@@ -71,7 +102,10 @@ watch(endt,async (nv,ov)=>{
     console.log(nv,ov);
     if(intervalId)
         clearInterval(intervalId);
-    animateId = requestIdleCallback(getLeftTimeString);
+
+        console.log(endt.value)
+    if(endt.value!=0)
+        animateId = requestIdleCallback(getLeftTimeString);
     // console.log(endt.value)
 },{
     deep:true

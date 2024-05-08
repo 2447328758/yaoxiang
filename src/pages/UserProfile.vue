@@ -83,6 +83,7 @@ function setEndt(ord){
     //let a = new Uint8Array(2);
     //a[0]=input.getHours();a[1]=input.getMinutes();
     sendCmd(prefix+`${to2bit(input.getHours())}${to2bit(input.getMinutes())}`);
+    sendCmd(prefix+`${to2bit(input.getHours())}${to2bit(input.getMinutes())}`);
     ElMessage({
                     message: "设置成功！",
                     type: 'success',
@@ -94,6 +95,7 @@ function setEndt(ord){
 function setDis(){
     // console.log("dis"+`${a.value}${b.value}${c.value}${d.value}`)
     // console.log(form)
+    sendCmd("dis"+`${form.a}${form.b}${form.c}${form.d}`);
     sendCmd("dis"+`${form.a}${form.b}${form.c}${form.d}`);
     ElMessage({
                     message: "设置成功！",
