@@ -35,7 +35,14 @@
         <el-row justify="end">
             <el-button style="margin:5px;" type="primary" @click="setDis()">设置</el-button>
         </el-row>
+        <el-divider></el-divider>
+        <el-row align="middle">
+            <el-col :push="1">
+                <el-text size='large' @click="router.push('/record')">服药记录</el-text>
 
+            </el-col>
+        </el-row>
+        <el-divider></el-divider>
      
         <!-- <el-button @click="send()">test send(发送uint8array(12344))</el-button> -->
 
@@ -46,6 +53,11 @@ import {reactive,ref} from 'vue'
 import { useStore } from 'vuex';
 import { sendCmd } from '@/js/mqtt';
 import { ElMessage } from 'element-plus';
+import {useRouter} from 'vue-router';
+const router = useRouter();
+
+
+
 const input1 = ref();
 const input2 = ref();
 const input3 = ref();
